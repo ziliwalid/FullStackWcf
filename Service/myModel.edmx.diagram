@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d5e31b72359c4f0a86ac3d2b89701c81" Name="Diagram1">
+        <EntityTypeShape EntityType="myDBModel.t_book" PointX="0.75" PointY="3.875" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDBModel.t_reservation" PointX="4.75" PointY="2.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="myDBModel.t_user" PointX="0.75" PointY="0.75" Width="1.5" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="myDBModel.FK__t_reserva__book___4D94879B" />
+        <AssociationConnector ManuallyRouted="false" Association="myDBModel.FK__t_reserva__user___4E88ABD4" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

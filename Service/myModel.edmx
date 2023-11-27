@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="myDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_book">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="bookTitle" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="genre" Nullable="false" Type="text" />
+        </EntityType>
+        <EntityType Name="t_reservation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="book_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="fullname" Nullable="false" MaxLength="255" Type="nvarchar" />
+          <Property Name="email" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="password" Nullable="false" MaxLength="50" Type="varchar" />
+        </EntityType>
+        <Association Name="FK__t_reserva__book___4D94879B">
+          <End Type="Self.t_book" Multiplicity="0..1" Role="t_book" />
+          <End Type="Self.t_reservation" Multiplicity="*" Role="t_reservation" />
+          <ReferentialConstraint>
+            <Principal Role="t_book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_reservation">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_reserva__user___4E88ABD4">
+          <End Type="Self.t_user" Multiplicity="0..1" Role="t_user" />
+          <End Type="Self.t_reservation" Multiplicity="*" Role="t_reservation" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_reservation">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myDBModelStoreContainer">
+          <EntitySet Name="t_book" EntityType="Self.t_book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_reservation" EntityType="Self.t_reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__t_reserva__book___4D94879B" Association="Self.FK__t_reserva__book___4D94879B">
+            <End EntitySet="t_book" Role="t_book" />
+            <End EntitySet="t_reservation" Role="t_reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_reserva__user___4E88ABD4" Association="Self.FK__t_reserva__user___4E88ABD4">
+            <End EntitySet="t_user" Role="t_user" />
+            <End EntitySet="t_reservation" Role="t_reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_book">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="bookTitle" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="genre" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <NavigationProperty Name="t_reservation" Relationship="Self.FK__t_reserva__book___4D94879B" FromRole="t_book" ToRole="t_reservation" />
+        </EntityType>
+        <EntityType Name="t_reservation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="book_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="t_book" Relationship="Self.FK__t_reserva__book___4D94879B" FromRole="t_reservation" ToRole="t_book" />
+          <NavigationProperty Name="t_user" Relationship="Self.FK__t_reserva__user___4E88ABD4" FromRole="t_reservation" ToRole="t_user" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="fullname" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <NavigationProperty Name="t_reservation" Relationship="Self.FK__t_reserva__user___4E88ABD4" FromRole="t_user" ToRole="t_reservation" />
+        </EntityType>
+        <Association Name="FK__t_reserva__book___4D94879B">
+          <End Type="Self.t_book" Multiplicity="0..1" Role="t_book" />
+          <End Type="Self.t_reservation" Multiplicity="*" Role="t_reservation" />
+          <ReferentialConstraint>
+            <Principal Role="t_book">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_reservation">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__t_reserva__user___4E88ABD4">
+          <End Type="Self.t_user" Multiplicity="0..1" Role="t_user" />
+          <End Type="Self.t_reservation" Multiplicity="*" Role="t_reservation" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="t_reservation">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="myDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_book" EntityType="Self.t_book" />
+          <EntitySet Name="t_reservation" EntityType="Self.t_reservation" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" />
+          <AssociationSet Name="FK__t_reserva__book___4D94879B" Association="Self.FK__t_reserva__book___4D94879B">
+            <End EntitySet="t_book" Role="t_book" />
+            <End EntitySet="t_reservation" Role="t_reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__t_reserva__user___4E88ABD4" Association="Self.FK__t_reserva__user___4E88ABD4">
+            <End EntitySet="t_user" Role="t_user" />
+            <End EntitySet="t_reservation" Role="t_reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myDBModelStoreContainer" CdmEntityContainer="myDBEntities1">
+          <EntitySetMapping Name="t_book">
+            <EntityTypeMapping TypeName="myDBModel.t_book">
+              <MappingFragment StoreEntitySet="t_book">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="bookTitle" ColumnName="bookTitle" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_reservation">
+            <EntityTypeMapping TypeName="myDBModel.t_reservation">
+              <MappingFragment StoreEntitySet="t_reservation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user">
+            <EntityTypeMapping TypeName="myDBModel.t_user">
+              <MappingFragment StoreEntitySet="t_user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

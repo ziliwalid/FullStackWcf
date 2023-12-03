@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeWorkCC1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +15,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.Buisness;
 
-namespace HomeWorkCC1
+namespace UI.UserControlls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ReservationControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ReservationControl : UserControl
     {
-        //s.Service1Client srv = new s.Service1Client();
-        public MainWindow()
+        public ReservationControl()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowBuisness(this);
+            this.DataContext = new MainWindowBuisness();
         }
-
-       
     }
 }

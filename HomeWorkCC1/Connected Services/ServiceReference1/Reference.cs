@@ -26,7 +26,7 @@ namespace ServiceReference1
         
         private string passwordField;
         
-        private ServiceReference1.ReservationDto[] reservationsField;
+        private System.Collections.Generic.List<ServiceReference1.ReservationDto> reservationsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string email
@@ -81,7 +81,7 @@ namespace ServiceReference1
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceReference1.ReservationDto[] reservations
+        public System.Collections.Generic.List<ServiceReference1.ReservationDto> reservations
         {
             get
             {
@@ -190,6 +190,18 @@ namespace ServiceReference1
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
         System.Threading.Tasks.Task<ServiceReference1.UserDto> LoginAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AddReservation", ReplyAction="http://tempuri.org/IService1/AddReservationResponse")]
+        System.Threading.Tasks.Task<ServiceReference1.ReservationDto> AddReservationAsync(int userId, int bookId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllBooks", ReplyAction="http://tempuri.org/IService1/GetAllBooksResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceReference1.BookDto>> GetAllBooksAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteReservation", ReplyAction="http://tempuri.org/IService1/DeleteReservationResponse")]
+        System.Threading.Tasks.Task<bool> DeleteReservationAsync(int reservationId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/refresh", ReplyAction="http://tempuri.org/IService1/refreshResponse")]
+        System.Threading.Tasks.Task<ServiceReference1.UserDto> refreshAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
@@ -245,6 +257,26 @@ namespace ServiceReference1
         public System.Threading.Tasks.Task<ServiceReference1.UserDto> LoginAsync(string email, string password)
         {
             return base.Channel.LoginAsync(email, password);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.ReservationDto> AddReservationAsync(int userId, int bookId)
+        {
+            return base.Channel.AddReservationAsync(userId, bookId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceReference1.BookDto>> GetAllBooksAsync()
+        {
+            return base.Channel.GetAllBooksAsync();
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteReservationAsync(int reservationId)
+        {
+            return base.Channel.DeleteReservationAsync(reservationId);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.UserDto> refreshAsync(int userId)
+        {
+            return base.Channel.refreshAsync(userId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

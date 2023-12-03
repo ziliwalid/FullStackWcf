@@ -14,6 +14,17 @@ namespace Service
     {
         [OperationContract]
         UserDto Login(string email, string password);
+
+        [OperationContract]
+        ReservationDto AddReservation(int userId, int bookId);
+        [OperationContract]
+        List<BookDto> GetAllBooks();
+        [OperationContract]
+        bool DeleteReservation(int reservationId);
+        [OperationContract]
+        UserDto refresh(int userId);
+
+
     }
 
 }

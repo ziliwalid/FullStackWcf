@@ -19,7 +19,7 @@ namespace Service
         {
             this.t_reservation = new HashSet<t_reservation>();
         }
-    
+
         public int id { get; set; }
         public string bookTitle { get; set; }
         public string genre { get; set; }
